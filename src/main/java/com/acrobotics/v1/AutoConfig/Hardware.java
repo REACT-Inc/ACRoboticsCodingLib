@@ -16,7 +16,7 @@ public class Hardware {
      */
     public Hardware(LinearOpMode opModeObject){
         //Scans
-//        HardwareScanner.beginScan(opModeObject);
+        HardwareScanner.beginScan(opModeObject);
 
 
 
