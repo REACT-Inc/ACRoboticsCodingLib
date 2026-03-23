@@ -91,7 +91,7 @@ public class MathEx {
      *
      * @throws com.acrobotics.v1.Exception.MathExException When something goes wrong.
      *
-     * @todo 3/20/2026  Make the exception that we catch be Outputted somewhere
+     * Fixed 3/23/2026 TOD0 3/20/2026  Make the exception that we catch be Outputted somewhere
      *
      * @return T/F If its inside or not
      */
@@ -108,7 +108,7 @@ public class MathEx {
             // 3. Return true only if it's further than the margin from every wall
             return (distAB >= margin && distBC >= margin && distCA >= margin);
         }catch( Exception e ){
-            //TODO HERE
+            RobotTrace.trace(e.getMessage());
             throw new MathExException(e.getMessage());
 
         }
@@ -125,7 +125,7 @@ public class MathEx {
      *
      * @throws com.acrobotics.v1.Exception.MathExException When something goes wrong.
      *
-     * @todo 3/20/2026  Make the exception that we catch be Outputted somewhere
+     * Fixed 3/23/2026 TOD0 3/20/2026  Make the exception that we catch be Outputted somewhere
      *
      * @return the distance of the point to line
      */
@@ -157,7 +157,7 @@ public class MathEx {
             double dy = y - yy;
             return Math.sqrt(dx * dx + dy * dy);
         }catch(Exception e){
-            //TODO HERE
+            RobotTrace.trace(e.getMessage());
             throw new MathExException(e.getMessage());
         }
     }
@@ -175,7 +175,7 @@ public class MathEx {
      *
      * @throws com.acrobotics.v1.Exception.MathExException When something goes wrong.
      *
-     * @todo 3/20/2026  Make the exception that we catch be Outputted somewhere
+     * Fixed 3/23/2026 TOD0 3/20/2026  Make the exception that we catch be Outputted somewhere
      *
      * @return T/F If its inside or not
      */
@@ -192,7 +192,7 @@ public class MathEx {
             // If there are no negative areas OR no positive areas, the point is inside
             return !(has_neg && has_pos);
         }catch(Exception e){
-            //TODO HERE
+            RobotTrace.trace(e.getMessage());
             throw new MathExException(e.getMessage());
         }
     }
@@ -218,7 +218,7 @@ public class MathEx {
      *
      * @throws com.acrobotics.v1.Exception.MathExException When something goes wrong.
      *
-     * @todo 3/20/2026  Make the exception that we catch be Outputted somewhere
+     * Fixed 3/23/2026 TOD0 3/20/2026  Make the exception that we catch be Outputted somewhere
      *
      * @return T/F If its inside or not
      */
@@ -232,7 +232,7 @@ public class MathEx {
             }
             return isInsidePolygonWithMargin(px, py, margin, ary);
         }catch(Exception e){
-            //TODO HERE
+            RobotTrace.trace(e.getMessage());
             throw new MathExException(e.getMessage());
         }
     }
@@ -252,7 +252,7 @@ public class MathEx {
      *
      * @throws com.acrobotics.v1.Exception.MathExException When something goes wrong.
      *
-     * @todo 3/20/2026  Make the exception that we catch be Outputted somewhere
+     * Fixed 3/23/2026 TOD0 3/20/2026  Make the exception that we catch be Outputted somewhere
      *
      * @return T/F If its inside or not
      */
@@ -271,7 +271,7 @@ public class MathEx {
 
             return true;
         }catch(Exception e){
-            //TODO HERE
+            RobotTrace.trace(e.getMessage());
             throw new MathExException(e.getMessage());
         }
     }
@@ -288,7 +288,7 @@ public class MathEx {
      *
      * @throws com.acrobotics.v1.Exception.MathExException When something goes wrong.
      *
-     * @todo 3/20/2026  Make the exception that we catch be Outputted somewhere
+     * Fixed 3/23/2026 TOD0 3/20/2026  Make the exception that we catch be Outputted somewhere
      *
      * @return T/F If its inside or not
      */
@@ -311,7 +311,7 @@ public class MathEx {
 
             return inside;
         }catch(Exception e){
-            //TODO HERE
+            RobotTrace.trace(e.getMessage());
             throw new MathExException(e.getMessage());
         }
     }
