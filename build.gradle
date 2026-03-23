@@ -3,7 +3,11 @@ plugins {
 
     id 'maven-publish' // Add this line
 }
-
+repositories {
+    mavenCentral()
+    maven { url = "https://mymaven.bylazar.com/releases" }
+    google() // Needed for androidx
+}
 android {
     namespace 'com.acrobotics.v1'
     compileSdk 34
