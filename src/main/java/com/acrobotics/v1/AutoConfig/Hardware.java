@@ -7,6 +7,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  *
  * controlls when we scan etc the hardware and more
  * the brains for the autoconfig
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class Hardware {
 

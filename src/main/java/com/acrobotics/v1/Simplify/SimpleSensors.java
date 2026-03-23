@@ -5,6 +5,10 @@ package com.acrobotics.v1.Simplify;
  * rgb it owuld be a number 1-9
  *
  * Distance would return the num of course or could be used for motor easily
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class SimpleSensors {
 

@@ -3,6 +3,10 @@ package com.acrobotics.v1;
 /**
  * This would hold data but bbe easily
  * addable
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class DataObject {
 

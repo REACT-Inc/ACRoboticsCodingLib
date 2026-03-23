@@ -13,6 +13,10 @@ import java.util.Objects;
  * long as it had a encoder its the same idea
  *
  * Could be difficult but its possible
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class SimplePower {
 

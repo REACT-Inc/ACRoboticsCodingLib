@@ -3,6 +3,12 @@ package com.acrobotics.v1;
 //import com.bylazar.telemetry.PanelsTelemetry;
 /**
  * acts as a centural place to log the robot stuff to panels etc
+ *
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
+ *
  */
 public class RobotTrace {
 

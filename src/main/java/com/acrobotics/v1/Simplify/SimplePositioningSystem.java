@@ -12,6 +12,10 @@ import com.pedropathing.paths.PathChain;
  * Ex
  * would have a degres at the end or even landmarks?
  * DriveTo(1,1 90)
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class SimplePositioningSystem {
 

@@ -9,6 +9,10 @@ package com.acrobotics.v1.Storage;
  * also helps im the case if we update etc
  *
  * In this we could also have  a usb Drive act as a log system so we could easily dignose issues
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class USBAttachedStorageDevice {
 

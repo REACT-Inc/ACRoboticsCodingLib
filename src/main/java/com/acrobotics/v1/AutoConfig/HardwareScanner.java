@@ -4,6 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
  * handles scanning the hardware for devices and relaying they exist
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class HardwareScanner {
 

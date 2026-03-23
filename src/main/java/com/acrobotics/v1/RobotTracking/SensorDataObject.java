@@ -9,6 +9,10 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
  *
  * For example if we have like 8 distance sensors it would
  * combine those
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class SensorDataObject {
 

@@ -5,6 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ *
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
+ */
 // 1. Keep this annotation alive while the app is running
 @Retention(RetentionPolicy.RUNTIME)
 // 2. Only allow this to be attached to variables (fields)

@@ -12,6 +12,10 @@ import java.io.File;
  * Makes the bare bones for writing and reading
  *
  * And handles the logging and Saving stuff
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
  */
 public class StorageDevice {
 
