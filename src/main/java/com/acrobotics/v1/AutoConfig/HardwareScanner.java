@@ -5,6 +5,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 /**
  * handles scanning the hardware for devices and relaying they exist
  *
+ * <p>
+ *     See the configs are stored in the xml in a folder we can manulplate that folder etc and everything
+ *     But i dont believe theres a direct way to see the active configuration file
+ *
+ *
+ *     You can do the same with the onBot Programs theres full access for it to delete itself actually
+ *
+ * </p>
+ *
+ *
  * @author Cayden Riddle
  * @version DEV.1
  *
