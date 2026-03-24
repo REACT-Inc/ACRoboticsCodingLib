@@ -1,5 +1,7 @@
 package com.acrobotics.v1.AutoConfig;
 
+import java.util.HashMap;
+
 /**
  * Handles the hwardware known device xml formatting
  *
@@ -10,4 +12,29 @@ package com.acrobotics.v1.AutoConfig;
  *
  */
 public class HardwareNamespace {
+
+    public enum HardwareNamespaces  {
+        MOTOR_1,
+        MOTOR_2,
+        MOTOR_3,
+        MOTOR_4,
+        MOTOR_5,
+        MOTOR_6,
+        MOTOR_7,
+        MOTOR_8
+    };
+
+    private final HashMap<HardwareNamespaces, String[]> hardware = new HashMap<HardwareNamespaces, String[]>() {
+        {
+            put(HardwareNamespaces.MOTOR_1, new String[]{"ctrl_hub_dcMotor_1", "goBILDA5203SeriesMotor"});
+            put(HardwareNamespaces.MOTOR_2, new String[]{"ctrl_hub_dcMotor_2", "goBILDA5203SeriesMotor"});
+            put(HardwareNamespaces.MOTOR_3, new String[]{"ctrl_hub_dcMotor_3", "goBILDA5203SeriesMotor"});
+            put(HardwareNamespaces.MOTOR_4, new String[]{"ctrl_hub_dcMotor_4", "goBILDA5203SeriesMotor"});
+
+            put(HardwareNamespaces.MOTOR_5, new String[]{"exp_hub_dcMotor_1", "goBILDA5203SeriesMotor"});
+            put(HardwareNamespaces.MOTOR_6, new String[]{"exp_hub_dcMotor_2", "goBILDA5203SeriesMotor"});
+            put(HardwareNamespaces.MOTOR_7, new String[]{"exp_hub_dcMotor_3", "goBILDA5203SeriesMotor"});
+            put(HardwareNamespaces.MOTOR_8, new String[]{"exp_hub_dcMotor_4", "goBILDA5203SeriesMotor"});
+        }
+    };
 }

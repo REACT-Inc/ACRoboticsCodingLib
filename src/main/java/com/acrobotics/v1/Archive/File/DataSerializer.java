@@ -1,4 +1,4 @@
-package com.acrobotics.v1.File;
+package com.acrobotics.v1.Archive.File;
 
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,6 +9,16 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *
+ *
+ *
+ * @author Cayden Riddle
+ * @version DEV.1
+ *
+ * @Archived 3/24/2026
+ *
+ */
 public class DataSerializer {
 
     private FileContent fileContent;

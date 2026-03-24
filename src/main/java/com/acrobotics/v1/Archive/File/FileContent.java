@@ -1,4 +1,4 @@
-package com.acrobotics.v1.File;
+package com.acrobotics.v1.Archive.File;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
  *
  * @author Criddle
  * @version 2.0
+ * @Archived 3/24/2026
  */
 public class FileContent {
 

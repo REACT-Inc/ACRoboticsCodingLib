@@ -1,4 +1,4 @@
-package com.acrobotics.v1.File;
+package com.acrobotics.v1.Archive.File;
 
 import android.os.Environment;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -15,6 +15,21 @@ import java.util.List;
  * 4. It returns the filename of the config that matches the robot.
  * </p>
  * * @author Criddle
+ *
+ *
+ *
+ *
+ *
+ * 3/24/2026 Rememertive Notes
+ * The exploration project resulted in new discoverys for us in the sense of  being able to locate the active config and change it
+ * including if the device is mapped
+ *
+ *
+ * The other things this resulted in in other classes for dataserlization for logging only
+ * and a easy way to put variables in a file and store them etc make them editable
+ *
+ *
+ * @Archived 3/24/2026
  */
 public class ConfigScanner {
 

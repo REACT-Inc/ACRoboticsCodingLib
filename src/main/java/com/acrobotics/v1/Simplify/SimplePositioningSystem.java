@@ -38,6 +38,7 @@ public class SimplePositioningSystem {
      * @param endGoal the ending for the placement for the robot
      */
     public void navigate(Pose endGoal){
+        ///  This would need the enviorment sensors to work correctly thought
         //Todo
     }
 

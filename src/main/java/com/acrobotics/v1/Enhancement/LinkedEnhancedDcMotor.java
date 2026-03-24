@@ -1,4 +1,4 @@
-package com.acrobotics.v1.Remapping;
+package com.acrobotics.v1.Enhancement;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;

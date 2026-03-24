@@ -1,4 +1,4 @@
-package com.acrobotics.v1.File;
+package com.acrobotics.v1.Archive.File;
 
 import android.os.Environment;
 import java.io.File;
@@ -13,6 +13,7 @@ import java.io.File;
  *
  * @author Criddle
  * @version 2.0 (Refined for robustness)
+ * @Archived 3/24/2026
  */
 public class InternalFile {
 

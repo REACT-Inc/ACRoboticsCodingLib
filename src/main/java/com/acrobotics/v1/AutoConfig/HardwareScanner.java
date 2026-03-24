@@ -1,6 +1,7 @@
 package com.acrobotics.v1.AutoConfig;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.I2cDevice;
 
 /**
  * handles scanning the hardware for devices and relaying they exist
@@ -31,5 +32,27 @@ public class HardwareScanner {
      */
     public static void beginScan(LinearOpMode opMode){
         //TODO
+    }
+
+
+    /**
+     * This would scan plugged in devices
+     *
+     * how this works is that our active config is a config that has everything filled up so theres somehing for every slot
+     * servos when plugged in (I blieve return a position (CHECK FOR CRSERVO))
+     * motors with encoders would aswell
+     *
+     * therfor sensing is possible
+     *
+     * sensors its a bit different not sure how yet but
+     * i2c devices we can get the address but not sure if we can even if inproper mismatch like if its a distance sensor and config as color
+     *
+     * BUT we could put every type of sesnor as one port and solve that
+     *
+     * Digital i have no clue for differenting it right now
+     * Analog is just voltage and i dont even know what sensors use this really besies the laser distance gobilda
+     */
+    public static void scanDevices(){
+
     }
 }
