@@ -18,8 +18,16 @@ import java.util.HashMap;
 public class Hardware {
 
 
-
+    /**
+     * All the devices in the current configuration
+     */
     private HashMap<String, HardwareDevice> configurationDevices = new HashMap<String, HardwareDevice>();
+    /**
+     * All the Devices that we know for sure exist in the world
+     * THIS IS for devices we found when scanning 
+     * @// TODO: 3/24/2026 This needs worked on and what is the parameters for the map 
+     */
+    private HashMap<String, HardwareDevice> activeDevices = new HashMap<String, HardwareDevice>();
 
     /**
      * This would init the hardwares with the opmode object so we can do everything we can do in the actual class here etc (I Hope atleast)

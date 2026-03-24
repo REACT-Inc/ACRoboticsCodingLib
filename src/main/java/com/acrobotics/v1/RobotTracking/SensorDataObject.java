@@ -21,7 +21,10 @@ public class SensorDataObject {
     public DataObject sensorData = new DataObject();
 
 
-
+    /**
+     * @// TODO: 3/24/2026  this needs updated to be concurrent with lidar spining tech idea 
+     * @param sensors
+     */
     public SensorDataObject(SimpleSensors.Distance... sensors){
 
         for(int index = 0; index < sensors.length; index++){

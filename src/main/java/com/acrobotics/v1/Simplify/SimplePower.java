@@ -22,7 +22,7 @@ public class SimplePower {
 
 
     /**
-     * The Clas for the combo of the motor and servos
+     * The Class for the combo of the motor and servos
      */
     public class Motor{
         private DcMotorEx motor;

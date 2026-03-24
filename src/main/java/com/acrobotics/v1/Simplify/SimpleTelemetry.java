@@ -19,6 +19,13 @@ public class SimpleTelemetry {
 
     private final Telemetry ftcTelemetry;
     private final PanelsTelemetry panelsTelemetry;
+
+    /**
+     * Consts the telemetry instance
+     * @// TODO: 3/24/2026  make the panels instance here so its a one variable constructor #Simplication
+     * @param ftc FTC Telemetry
+     * @param panels Panels Instacne
+     */
     public SimpleTelemetry(Telemetry ftc, PanelsTelemetry panels){
         ftcTelemetry = ftc;
         panelsTelemetry = panels;

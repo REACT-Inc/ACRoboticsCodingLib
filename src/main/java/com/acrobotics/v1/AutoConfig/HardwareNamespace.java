@@ -13,6 +13,9 @@ import java.util.HashMap;
  */
 public class HardwareNamespace {
 
+    /**
+     * Total Hardware devices
+     */
     public enum HardwareNamespaces  {
         MOTOR_1,
         MOTOR_2,
@@ -23,7 +26,10 @@ public class HardwareNamespace {
         MOTOR_7,
         MOTOR_8
     };
-
+    /**
+     * THis is the map for the hardware devices we want in the config
+     * @// TODO: 3/24/2026  These need to bew used below this  and auto added to one string soit is vaild xml
+     */
     private final HashMap<HardwareNamespaces, String[]> hardware = new HashMap<HardwareNamespaces, String[]>() {
         {
             put(HardwareNamespaces.MOTOR_1, new String[]{"ctrl_hub_dcMotor_1", "goBILDA5203SeriesMotor"});
