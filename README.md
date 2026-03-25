@@ -11,3 +11,9 @@ Dependencies::
   Panels - Install it here
 
 
+
+Hardware Requirements::
+  SimplicationSystem::
+      The simplifcaiton system requires your Expansion and Servo Hubs if used have the Id Expansion Hub 2 (DEFAULT) and Servo Hub 3 (DEFAULT) 
+
+      
