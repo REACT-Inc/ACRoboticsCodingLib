@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * @// TODO: 3/24/2026 maybe this class should have the ability to handle all panels actions (Expcept Drawing) 
  *
  */
-public class SimpleTelemetry {
+public final class SimpleTelemetry {
 
 
     private static Telemetry ftcTelemetry;

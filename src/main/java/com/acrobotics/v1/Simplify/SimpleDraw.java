@@ -30,7 +30,7 @@ Simple Drawing  this way draw polygon etc all types
  *
  * @// TODO: 3/23/2026 update this to new standards
  */
-public class SimpleDraw {
+public final class SimpleDraw {
 
     private Follower follower;
     public SimpleDraw(Follower follower){

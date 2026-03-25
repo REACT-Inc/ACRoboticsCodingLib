@@ -10,7 +10,7 @@ package com.acrobotics.v1.Simplify;
  * @version DEV.1
  *
  */
-public class SimpleSensors {
+public final class SimpleSensors {
 
 
 

@@ -17,7 +17,7 @@ import java.io.File;
  * @version DEV.1
  *
  */
-public class StorageDevice {
+public final class StorageDevice {
 
 
 

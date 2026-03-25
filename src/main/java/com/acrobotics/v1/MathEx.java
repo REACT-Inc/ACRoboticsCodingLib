@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Also in flywheel stuff it has a table to graph data for a curve we would want that here
  */
 
-public class MathEx {
+public final class MathEx {
 
 
     @StorageDeviceAllocatedMemory(key = "DriveDampen")
@@ -48,7 +48,7 @@ public class MathEx {
      *
      * @return float[] Fr, Fl, Br, Bl Drive Powers
      */
-    public float[] computeMechDrive(Gamepad DrivePad) {
+    public static float[] computeMechDrive(Gamepad DrivePad) {
         float walk = -DrivePad.left_stick_y;     // Forward/Backward
 
         float strafe = DrivePad.left_stick_x;   // Left/Right
@@ -95,7 +95,7 @@ public class MathEx {
      *
      * @return T/F If its inside or not
      */
-    public boolean isInsideTriangleWithMargin(double px, double py, double ax, double ay, double bx, double by, double cx, double cy, double margin) {
+    public static boolean isInsideTriangleWithMargin(double px, double py, double ax, double ay, double bx, double by, double cx, double cy, double margin) {
         try {
             // 1. First, check if it's even in the triangle at all
             if (!isPointInTriangle(px, py, ax, ay, bx, by, cx, cy)) return false;
@@ -129,7 +129,7 @@ public class MathEx {
      *
      * @return the distance of the point to line
      */
-    public  double linePointDist(double x, double y, double x1, double y1, double x2, double y2) {
+    public static double linePointDist(double x, double y, double x1, double y1, double x2, double y2) {
         try {
             double A = x - x1;
             double B = y - y1;
@@ -179,7 +179,7 @@ public class MathEx {
      *
      * @return T/F If its inside or not
      */
-    public  boolean isPointInTriangle(double px, double py, double ax, double ay, double bx, double by, double cx, double cy) {
+    public static boolean isPointInTriangle(double px, double py, double ax, double ay, double bx, double by, double cx, double cy) {
         try {
             // Calculate the areas (using cross product) of the 3 sub-triangles
             double d1 = sign(px, py, ax, ay, bx, by);
@@ -197,7 +197,7 @@ public class MathEx {
         }
     }
 
-    private  double sign(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y) {
+    private static double sign(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y) {
         return (p1x - p3x) * (p2y - p3y) - (p2x - p3x) * (p1y - p3y);
     }
 
@@ -222,7 +222,7 @@ public class MathEx {
      *
      * @return T/F If its inside or not
      */
-    public  boolean isInsidePolygonWithMargin(double px, double py, double margin, ArrayList<Pose> vertices){
+    public static boolean isInsidePolygonWithMargin(double px, double py, double margin, ArrayList<Pose> vertices){
         try {
             Pose[] ary = new Pose[vertices.size()];
             int index = 0;
@@ -256,7 +256,7 @@ public class MathEx {
      *
      * @return T/F If its inside or not
      */
-    public  boolean isInsidePolygonWithMargin(double px, double py, double margin, Pose... vertices) {
+    public static boolean isInsidePolygonWithMargin(double px, double py, double margin, Pose... vertices) {
         try {
             // 1. Check if we are inside the shape at all
             if (!isInsidePolygon(px, py, vertices)) return false;
@@ -292,7 +292,7 @@ public class MathEx {
      *
      * @return T/F If its inside or not
      */
-    public  boolean isInsidePolygon(double px, double py, Pose... vertices) {
+    public static boolean isInsidePolygon(double px, double py, Pose... vertices) {
         try {
             int numVertices = vertices.length;
             boolean inside = false;

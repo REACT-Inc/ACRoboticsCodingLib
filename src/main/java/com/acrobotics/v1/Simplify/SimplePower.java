@@ -18,7 +18,7 @@ import java.util.Objects;
  * @version DEV.1
  *
  */
-public class SimplePower {
+public final class SimplePower {
 
 
     /**

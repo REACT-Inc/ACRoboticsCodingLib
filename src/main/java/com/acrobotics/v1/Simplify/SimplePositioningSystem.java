@@ -17,7 +17,7 @@ import com.pedropathing.paths.PathChain;
  * @version DEV.1
  *
  */
-public class SimplePositioningSystem {
+public final class SimplePositioningSystem {
 
     private Follower follower;
 

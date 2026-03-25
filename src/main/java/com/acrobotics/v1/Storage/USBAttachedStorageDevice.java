@@ -14,7 +14,7 @@ package com.acrobotics.v1.Storage;
  * @version DEV.1
  *
  */
-public class USBAttachedStorageDevice {
+public  final class USBAttachedStorageDevice {
 
 
 
