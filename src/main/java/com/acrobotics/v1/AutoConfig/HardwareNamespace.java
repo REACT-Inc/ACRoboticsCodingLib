@@ -141,7 +141,7 @@ public class HardwareNamespace {
             put(HardwareNamespaces.I2C_BUS8_2,      new String[]{"exp_hub_i2c_bus4_2",          "ColorSensorV3",    "0x52"          });
             put(HardwareNamespaces.I2C_BUS8_3,      new String[]{"exp_hub_i2c_bus4_3",          "IMU",              "0x8"           });
             put(HardwareNamespaces.I2C_BUS8_4,      new String[]{"exp_hub_i2c_bus4_4",          "PinPoint",         "0x31"          });
-
+/// TODO SERVOS CAN BE DECLARED AS CR SERVO AND OPERATED BY SETPOSITON
 //            put(HardwareNamespaces.SERVO_7,         new String[]{"exp_hub_servo_1",             "SERVO"                             });
 
         }
