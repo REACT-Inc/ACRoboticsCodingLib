@@ -1,19 +1,16 @@
-package com.acrobotics.v1.Simplify;
+package com.acrobotics.v1;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 /**
- * A Simple Op mode extension to the main linear op mode so we can more direclty affect the programs
- *
- *
- * You extend this class  when making your op mode!
+ * THis is th eadvanced opmode for us
  *
  *
  * @author Cayden Riddle
  * @version DEV.1
  *
  */
-public abstract class SimpleOpMode extends OpMode {
+public abstract class RobotOpMode extends OpMode {
 
 
 
@@ -96,6 +93,11 @@ public abstract class SimpleOpMode extends OpMode {
     @Override
     public final void stop() {
         /// TODO stop stuff
-
+        onStop();
     }
+
+    /**
+     * You override this
+     */
+    public abstract void onStop();
 }

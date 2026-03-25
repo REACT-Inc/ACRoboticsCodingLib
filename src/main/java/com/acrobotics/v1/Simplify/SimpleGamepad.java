@@ -14,20 +14,57 @@ import com.qualcomm.robotcore.hardware.Gamepad;
  * @version DEV.1
  *
  */
-public class SimpleGamepad {
+public final class SimpleGamepad {
+    /**
+     * Shape Buttons [Pad1, Pad2]
+     */
+    public static boolean[] trianglePressed = {false, false};
+    public static boolean[] crossPressed = {false, false};
+    public static boolean[] circlePressed = {false, false};
+    public static boolean[] squarePressed = {false, false};
 
-    protected boolean[] xPressed = {false, false};
+    /**
+     * Arrow Buttons [Pad1, Pad2]
+     */
+    public static boolean[] dpadUpPressed = {false, false};
+    public static boolean[] dpadDownPressed = {false, false};
+    public static boolean[] dpadRightPressed = {false, false};
+    public static boolean[] dpadLeftPressed = {false, false};
 
 
     /**
      * THis would be the loop called when we loop everything in the opmode
      * @param pad1 gamepad1
-     *
      * @param pad2 gamepad2
+     * @// TODO: 3/24/2026 add rest of gamepad  
      */
     public void loop(Gamepad pad1, Gamepad pad2){
-        xPressed[0] = pad1.x;
-        xPressed[1] = pad2.x;
+        trianglePressed[0] = pad1.triangle;
+        trianglePressed[1] = pad2.triangle;
+        
+        crossPressed[0] = pad1.cross;
+        crossPressed[1] = pad2.cross;
+        
+        circlePressed[0] = pad1.circle;
+        circlePressed[1] = pad2.circle;
+        
+        squarePressed[0] = pad1.square;
+        squarePressed[1] = pad2.square;
+
+
+
+        dpadUpPressed[0] = pad1.dpad_up;
+        dpadUpPressed[1] = pad2.dpad_up;
+
+        dpadDownPressed[0] = pad1.dpad_down;
+        dpadDownPressed[1] = pad2.dpad_down;
+
+        dpadLeftPressed[0] = pad1.dpad_left;
+        dpadLeftPressed[1] = pad2.dpad_left;
+
+        dpadRightPressed[0] = pad1.dpad_right;
+        dpadRightPressed[1] = pad2.dpad_right;
+        
 
     }
 
