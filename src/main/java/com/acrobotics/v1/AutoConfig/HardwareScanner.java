@@ -53,6 +53,9 @@ public class HardwareScanner {
      * Analog is just voltage and i dont even know what sensors use this really besies the laser distance gobilda
      */
     public static void scanDevices(){
+//        HardwareMapEx.getDevices()
+        /// Eg foreach device check status (If i send move commands does it move), (does sensor change value or returning anything)
+        /// By Default currently the digital channels are touch always so
 
     }
 }
