@@ -17,6 +17,8 @@ import java.util.Objects;
  * @author Cayden Riddle
  * @version DEV.1
  *
+ * @// TODO: 3/25/2026  Need to look into if we can have the config device name one thing with a servo and then hardeare map it as cr servo
+ * would be much easier if so
  */
 public final class SimplePower {
 
