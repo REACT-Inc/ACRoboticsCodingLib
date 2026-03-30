@@ -1,5 +1,6 @@
 package com.acrobotics.v1.AutoConfig;
 
+import com.acrobotics.v1.Simplify.SimpleOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.I2cDevice;
 
@@ -30,7 +31,7 @@ public class HardwareScanner {
      * NEED to see actual overall affect in perfromancee
      * @param opMode the opmode
      */
-    public static void beginScan(LinearOpMode opMode){
+    public static void beginScan(SimpleOpMode opMode){
         //TODO
     }
 
@@ -39,18 +40,14 @@ public class HardwareScanner {
      * This would scan plugged in devices
      *
      * how this works is that our active config is a config that has everything filled up so theres somehing for every slot
-     * servos when plugged in (I blieve return a position (CHECK FOR CRSERVO))
-     * motors with encoders would aswell
+     * Servos CR and normal can be driven using the Servo config (Setposition would make it turn contiunuiously Because it will never change from 0)
+     * Motors we can run the motor at like 0.01 an still detect a change in encoder value because of the 6000 rpm (aslong as we dpnt use 6000)rpm motors
+     * Then for the i2c Ports we assign every port 4 different sensors and check if any of those sensors on each port return anything for us we will use (LIDAR, Pinpoint, Colorv3, IMU)
+     * Then Digital For now is always a touch sensor,
+     * Also analog is unused
      *
-     * therfor sensing is possible
+     * THIS would scan the file for the config and access all devices in the config and try to use the hardware map to get them and then move or get singal to check if they exist
      *
-     * sensors its a bit different not sure how yet but
-     * i2c devices we can get the address but not sure if we can even if inproper mismatch like if its a distance sensor and config as color
-     *
-     * BUT we could put every type of sesnor as one port and solve that
-     *
-     * Digital i have no clue for differenting it right now
-     * Analog is just voltage and i dont even know what sensors use this really besies the laser distance gobilda
      */
     public static void scanDevices(){
 ///        HardwareMapEx.getDevices()

@@ -81,9 +81,9 @@ public class HardwareNamespace {
             put(HardwareNamespaces.DIGITAL_8,       new String[]{"ctrl_hub_digital_8",          "TouchSensor"                       });
 
             put(HardwareNamespaces.ANALOG_1,        new String[]{"ctrl_hub_analog_1",           "Floodgate Power Switch"            });
-            put(HardwareNamespaces.ANALOG_2,        new String[]{"ctrl_hub_analog_2",           "Floodgate"                         });
+            put(HardwareNamespaces.ANALOG_2,        new String[]{"ctrl_hub_analog_2",           "Floodgate Power Switch"            });
             put(HardwareNamespaces.ANALOG_3,        new String[]{"ctrl_hub_analog_3",           "Floodgate Power Switch"            });
-            put(HardwareNamespaces.ANALOG_4,        new String[]{"ctrl_hub_analog_4",           "Floodgate"                         });
+            put(HardwareNamespaces.ANALOG_4,        new String[]{"ctrl_hub_analog_4",           "Floodgate Power Switch"            });
 
             put(HardwareNamespaces.I2C_BUS1_1,      new String[]{"ctrl_hub_i2c_bus1_1",         "Lidar",            "0x29"          });
             put(HardwareNamespaces.I2C_BUS1_2,      new String[]{"ctrl_hub_i2c_bus1_2",         "ColorSensorV3",    "0x52"          });
@@ -128,10 +128,10 @@ public class HardwareNamespace {
             put(HardwareNamespaces.DIGITAL_15,      new String[]{"exp_hub_digital_7",           "TouchSensor"                       });
             put(HardwareNamespaces.DIGITAL_16,      new String[]{"exp_hub_digital_8",           "TouchSensor"                       });
 
-            put(HardwareNamespaces.ANALOG_5,        new String[]{"exp_hub_analog_1",            "floodgate"                         });
-            put(HardwareNamespaces.ANALOG_6,        new String[]{"exp_hub_analog_2",            "floodgate"                         });
-            put(HardwareNamespaces.ANALOG_7,        new String[]{"exp_hub_analog_3",            "floodgate"                         });
-            put(HardwareNamespaces.ANALOG_8,        new String[]{"exp_hub_analog_4",            "floodgate"                         });
+            put(HardwareNamespaces.ANALOG_5,        new String[]{"exp_hub_analog_1",            "Floodgate Power Switch"            });
+            put(HardwareNamespaces.ANALOG_6,        new String[]{"exp_hub_analog_2",            "Floodgate Power Switch"            });
+            put(HardwareNamespaces.ANALOG_7,        new String[]{"exp_hub_analog_3",            "Floodgate Power Switch"            });
+            put(HardwareNamespaces.ANALOG_8,        new String[]{"exp_hub_analog_4",            "Floodgate Power Switch"            });
 
             put(HardwareNamespaces.I2C_BUS5_1,      new String[]{"exp_hub_i2c_bus1_1",          "Lidar",            "0x29"          });
             put(HardwareNamespaces.I2C_BUS5_2,      new String[]{"exp_hub_i2c_bus1_2",          "ColorSensorV3",    "0x52"          });

@@ -98,4 +98,19 @@ public abstract class SimpleOpMode extends OpMode {
         /// TODO stop stuff
 
     }
+    /**
+     * Sleeps for the given amount of milliseconds, or until the thread is interrupted (which usually
+     * indicates that the OpMode has been stopped).
+     * <p>This is simple shorthand for {@link Thread#sleep(long) sleep()}, but it does not throw {@link InterruptedException}.</p>
+     *
+     * @param milliseconds amount of time to sleep, in milliseconds
+     * @see Thread#sleep(long)
+     */
+    public final void sleep(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
 }
