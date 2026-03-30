@@ -1,5 +1,6 @@
 package com.acrobotics.v1.Simplify;
 
+import com.acrobotics.v1.AutoConfig.HardwareScanner;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 /**
@@ -30,6 +31,16 @@ public abstract class SimpleOpMode extends OpMode {
      */
     @Override
     public final void init() {
+        // Hardware Scan begin
+        HardwareScanner.beginScan(this);
+//
+//        // 2. Access your motors easily
+//        DcMotor frontLeft = Hardware.getMotor("front_left");
+//
+//        // 3. Safety Check: If it wasn't plugged in, frontLeft is null
+//        if (frontLeft != null) {
+//            frontLeft.setPower(1.0);
+//        }
         //This calls onInit in the subclass
         onInit();
     }

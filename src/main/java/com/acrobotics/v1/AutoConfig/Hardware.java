@@ -1,7 +1,10 @@
 package com.acrobotics.v1.AutoConfig;
 
+import com.acrobotics.v1.Simplify.SimpleOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.HashMap;
 
@@ -13,6 +16,8 @@ import java.util.HashMap;
  *
  * @author Cayden Riddle
  * @version DEV.1
+ * 
+ * @// TODO: 3/30/2026 Implement the rest of the device getter methods and Other useful methods getDriveDevices etc 
  *
  */
 public class Hardware {
@@ -33,7 +38,7 @@ public class Hardware {
      * This would init the hardwares with the opmode object so we can do everything we can do in the actual class here etc (I Hope atleast)
      * @param opModeObject the Class Object of the super
      */
-    public Hardware(LinearOpMode opModeObject){
+    public Hardware(SimpleOpMode opModeObject){
         //Scans
         HardwareScanner.beginScan(opModeObject);
 
@@ -51,6 +56,26 @@ public class Hardware {
     }
 
 
+    /**
+     * Gets a motor by its name from the verified list.
+     * Returns null if the motor didn't pass the hardware scan.
+     */
+    public static DcMotor getMotor(String name) {
+        HardwareDevice device = HardwareScanner.verifiedRegistry.get(name);
+        if (device instanceof DcMotor) {
+            return (DcMotor) device;
+        }
+        return null;
+    }
 
-
+    /**
+     * Gets a servo by its name from the verified list.
+     */
+    public static Servo getServo(String name) {
+        HardwareDevice device = HardwareScanner.verifiedRegistry.get(name);
+        if (device instanceof Servo) {
+            return (Servo) device;
+        }
+        return null;
+    }
 }
