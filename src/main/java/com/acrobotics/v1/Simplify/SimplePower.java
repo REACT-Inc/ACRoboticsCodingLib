@@ -13,7 +13,7 @@ import java.util.Objects;
  * long as it had a encoder its the same idea
  *
  * Could be difficult but its possible
- *
+ * @// TODO: 3/31/2026  remove controls and merge hardware mappping with this duplicate functions 
  * @author Cayden Riddle
  * @version DEV.1
  *

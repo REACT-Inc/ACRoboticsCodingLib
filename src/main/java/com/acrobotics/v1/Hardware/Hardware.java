@@ -88,7 +88,7 @@ public class Hardware {
      * @param name The name of the servo EG (When automated config is enabled it will be (HUB_SERVO_PORT) In use it would be (CTRL_SERVO_0)
      * @return the servo device (Or Null if not found)
      * 
-     * @// TODO: 3/30/2026 Ensure the int cast works as intendend 
+     * @// TODO: 3/30/2026 Ensure the int cast works as intendend
      */
     public static CustomServo getServo(String name) {
         HardwareDevice device = HardwareScanner.verifiedRegistry.get(name);

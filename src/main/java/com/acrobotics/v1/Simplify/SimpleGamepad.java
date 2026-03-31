@@ -9,7 +9,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
  * Or some sort of simplication to where it is striaght forward for what it does
  * Ideally i think one parameter methods would be easier
  *
- *
+ * @// TODO: 3/31/2026  figure if this class is even nessary 
+ * 
  * @author Cayden Riddle
  * @version DEV.1
  *

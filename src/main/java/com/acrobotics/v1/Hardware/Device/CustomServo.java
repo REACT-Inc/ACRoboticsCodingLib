@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * You can tell normal to cr servos apart by if there position changes
  *Alternativly we could have it based off if the you use setpower or position
  */
-public class CustomServo {
+public class CustomServo extends CustomDevice{
 
     /**
      * The Servo Instance

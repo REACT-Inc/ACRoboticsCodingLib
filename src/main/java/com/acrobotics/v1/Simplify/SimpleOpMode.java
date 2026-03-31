@@ -1,5 +1,9 @@
 package com.acrobotics.v1.Simplify;
 
+import com.acrobotics.v1.Hardware.Device.CustomDcMotor;
+import com.acrobotics.v1.Hardware.Device.CustomDevice;
+import com.acrobotics.v1.Hardware.Device.CustomServo;
+import com.acrobotics.v1.Hardware.Hardware;
 import com.acrobotics.v1.Hardware.HardwareScanner;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -9,12 +13,33 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
  *
  * You extend this class  when making your op mode!
  *
- *
+ * // TODO: 3/31/2026 implement variables for all decives here etc this way we can do all that stufff  
  * @author Cayden Riddle
  * @version DEV.1
  *
  */
 public abstract class SimpleOpMode extends OpMode {
+
+    public CustomDcMotor motor0;
+    public boolean squarePressed;
+    public boolean squarePressed(CustomDevice device, double power){
+        if(squarePressed){
+            if(device instanceof CustomDcMotor){
+                ((CustomDcMotor) device).setPower((float) power);
+            }
+            if(device instanceof CustomServo){
+                ((CustomServo) device).setPower((float) power);
+            }
+        }else{
+            if(device instanceof CustomDcMotor){
+                ((CustomDcMotor) device).setPower(0);
+            }
+            if(device instanceof CustomServo){
+                ((CustomServo) device).setPower(0);
+            }
+        }
+        return squarePressed;
+    }
 
 
 
@@ -33,6 +58,8 @@ public abstract class SimpleOpMode extends OpMode {
     public final void init() {
         // Hardware Scan begin
         HardwareScanner.beginScan(this);
+        /// TODO make the instance variables for this opmode for the motors and servos be init here
+        this.motor0 = Hardware.getMotor("exp_dcMotor_0");
 //
 //        // 2. Access your motors easily
 //        DcMotor frontLeft = Hardware.getMotor("front_left");
@@ -46,7 +73,7 @@ public abstract class SimpleOpMode extends OpMode {
     }
 
     /**
-     * For you to override and use as the Init block in your code!
+     * Use this method to make stuff happen when we Init the robot!
      *
      */
     public abstract void onInit();
