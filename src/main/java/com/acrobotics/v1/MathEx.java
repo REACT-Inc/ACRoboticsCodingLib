@@ -316,4 +316,16 @@ public final class MathEx {
         }
     }
 
+    /**
+     * Removes all letters and NoN Numbers from a string
+     * @param str the string to remove from
+     * @return the string as a double
+     */
+    public static double removeLetters(String str){
+        double num = 0.0;
+        /// Regex is for anything that is not a 0-9 (It will leave . Behinds)
+        num = Double.parseDouble(str.replaceAll("[^0-9.]", ""));
+        return (double)num;
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.acrobotics.v1.Simplify;
 
-import com.acrobotics.v1.AutoConfig.HardwareScanner;
+import com.acrobotics.v1.Hardware.HardwareScanner;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 /**
