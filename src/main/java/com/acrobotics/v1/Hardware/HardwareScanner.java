@@ -1,8 +1,7 @@
-package com.acrobotics.v1.AutoConfig;
+package com.acrobotics.v1.Hardware;
 
 import com.acrobotics.v1.Simplify.SimpleOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.I2cDevice;
+
 import android.util.Xml;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareDevice;

@@ -1,4 +1,4 @@
-package com.acrobotics.v1.AutoConfig;
+package com.acrobotics.v1.Hardware;
 
 import java.util.HashMap;
 

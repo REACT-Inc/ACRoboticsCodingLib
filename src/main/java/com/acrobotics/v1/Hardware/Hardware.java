@@ -1,10 +1,13 @@
-package com.acrobotics.v1.AutoConfig;
+package com.acrobotics.v1.Hardware;
 
+import com.acrobotics.v1.Hardware.Device.CustomDcMotor;
+import com.acrobotics.v1.Hardware.Device.CustomServo;
+import com.acrobotics.v1.MathEx;
 import com.acrobotics.v1.Simplify.SimpleOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import java.util.HashMap;
 
@@ -17,7 +20,8 @@ import java.util.HashMap;
  * @author Cayden Riddle
  * @version DEV.1
  * 
- * @// TODO: 3/30/2026 Implement the rest of the device getter methods and Other useful methods getDriveDevices etc 
+ * @// TODO: 3/30/2026 Implement the rest of the device getter methods and Other useful methods getDriveDevices etc
+ * @// TODO: 3/30/2026 We need the system that forces active config to a custom one we make!
  *
  */
 public class Hardware {
@@ -33,12 +37,13 @@ public class Hardware {
      * @// TODO: 3/24/2026 This needs worked on and what is the parameters for the map 
      */
     private HashMap<String, HardwareDevice> activeDevices = new HashMap<String, HardwareDevice>();
-
+    private static SimpleOpMode opmode;
     /**
      * This would init the hardwares with the opmode object so we can do everything we can do in the actual class here etc (I Hope atleast)
      * @param opModeObject the Class Object of the super
      */
     public Hardware(SimpleOpMode opModeObject){
+        opmode = opModeObject;
         //Scans
         HardwareScanner.beginScan(opModeObject);
 
@@ -60,22 +65,47 @@ public class Hardware {
      * Gets a motor by its name from the verified list.
      * Returns null if the motor didn't pass the hardware scan.
      */
-    public static DcMotor getMotor(String name) {
+    public static CustomDcMotor getMotor(String name) {
         HardwareDevice device = HardwareScanner.verifiedRegistry.get(name);
-        if (device instanceof DcMotor) {
-            return (DcMotor) device;
+        if (device instanceof DcMotorEx) {
+            return new CustomDcMotor(device, (int) MathEx.removeLetters(name));
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+//    public static DcMotorEx[]
+
+    /**
+     * Gets a servo by its name from the verified list.
+     *
+     * @implNote  This gets the servo under that name It will be a Servo object but may be configured in Cr Mode
+     * @param name The name of the servo EG (When automated config is enabled it will be (HUB_SERVO_PORT) In use it would be (CTRL_SERVO_0)
+     * @return the servo device (Or Null if not found)
+     * 
+     * @// TODO: 3/30/2026 Ensure the int cast works as intendend 
+     */
+    public static CustomServo getServo(String name) {
+        HardwareDevice device = HardwareScanner.verifiedRegistry.get(name);
+        if (device instanceof Servo) {
+            /// The remove letters form name works for getting the port because they are named with the port num in the name
+            return new CustomServo(device, (int) MathEx.removeLetters(name));
+
         }
         return null;
     }
 
     /**
-     * Gets a servo by its name from the verified list.
+     * Gets robot voltage
+     * @return the voltage
      */
-    public static Servo getServo(String name) {
-        HardwareDevice device = HardwareScanner.verifiedRegistry.get(name);
-        if (device instanceof Servo) {
-            return (Servo) device;
-        }
-        return null;
+    public static double getRobotVoltage(){
+        return opmode.hardwareMap.get(VoltageSensor.class, "voltageSensor").getVoltage();
     }
+
 }
