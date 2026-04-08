@@ -39,6 +39,11 @@ import java.util.HashMap;
  *
  * THIS would scan the file for the config and access all devices in the config and try to use the hardware map to get them and then move or get singal to check if they exist
  *
+ *
+ *
+ * We dont need to read the xml...
+ * we just force a xml with all the devices in it automatically..
+ *
  
  */
 public class HardwareScanner {

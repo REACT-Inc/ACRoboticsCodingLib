@@ -20,7 +20,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
  */
 public abstract class SimpleOpMode extends OpMode {
 
-    public CustomDcMotor motor0;
+    public CustomDcMotor motor0, motor1, motor2, motor3, motor4, motor5, motor6, motor7;
     public boolean squarePressed;
     public boolean squarePressed(CustomDevice device, double power){
         if(squarePressed){

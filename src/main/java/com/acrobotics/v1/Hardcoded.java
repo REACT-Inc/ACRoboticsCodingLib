@@ -15,6 +15,9 @@ package com.acrobotics.v1;
 public class Hardcoded {
 
 
+    public static String configurationName = "robotConfiguration.xml";
+
+
     public class BeltDrive{
 
         public final float Width = 18;

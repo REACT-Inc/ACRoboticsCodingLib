@@ -1,8 +1,13 @@
 package com.acrobotics.v1.Storage;
 
+import android.os.FileUtils;
+
 import com.acrobotics.v1.RobotTrace;
 
 import java.io.File;
+import java.nio.file.FileStore;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
 
 /**
  * Storafe device
@@ -66,6 +71,19 @@ public final class StorageDevice {
         public ReadAndWriteFile(String file){
 
         }
+    }
+
+    public static boolean checkForExternalDrive(){
+        /// todo make htis scan and check for any drives
+        return false;
+    }
+
+    /**
+     * Returns a array of drives found
+     */
+    public static ExternalDrive[] findExternalDrives(){
+
+
     }
 
 

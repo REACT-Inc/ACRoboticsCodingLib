@@ -1,11 +1,20 @@
 package com.acrobotics.v1.Hardware;
 
+import com.acrobotics.v1.RobotTrace;
+import com.acrobotics.v1.Storage.StorageDevice;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
- * Handles the hwardware known device xml formatting
+ * Handles configurating the hardware and config files
  *
- * this way we can catalog the hardware
+ * Automaitcally makes a new config file from hardware within this class
+ * parameterizied from the @autoconfig.
  *
  * @author Cayden Riddle
  * @version DEV.1
@@ -14,7 +23,7 @@ import java.util.HashMap;
  * @// TODO: 3/26/2026 Implement LED indicator in Digital Channels
  *
  */
-public class HardwareNamespace {
+public class HardwareConfigurator {
 
     /**
      * Total Hardware devices
@@ -60,6 +69,10 @@ public class HardwareNamespace {
         SERVO_1, SERVO_2, SERVO_3, SERVO_4, SERVO_5, SERVO_6,
         SERVO_7, SERVO_8, SERVO_9, SERVO_10, SERVO_11, SERVO_12
     };
+
+    HardwareNamespaces[] Motors = {HardwareNamespaces.MOTOR_1, HardwareNamespaces.MOTOR_2, HardwareNamespaces.MOTOR_3, HardwareNamespaces.MOTOR_4, HardwareNamespaces.MOTOR_5, HardwareNamespaces.MOTOR_6, HardwareNamespaces.MOTOR_7, HardwareNamespaces.MOTOR_8};
+
+    HardwareNamespaces[] Servos = {HardwareNamespaces.SERVO_1, HardwareNamespaces.SERVO_2, HardwareNamespaces.SERVO_3, HardwareNamespaces.SERVO_4, HardwareNamespaces.SERVO_5, HardwareNamespaces.SERVO_6, HardwareNamespaces.SERVO_7, HardwareNamespaces.SERVO_8, HardwareNamespaces.SERVO_9, HardwareNamespaces.SERVO_10, HardwareNamespaces.SERVO_11, HardwareNamespaces.SERVO_12};
     /**
      * THis is the map for the hardware devices we want in the config
      * @// TODO: 3/24/2026  These need to bew used below this  and auto added to one string soit is vaild xml
@@ -163,6 +176,92 @@ public class HardwareNamespace {
         }
     };
 
+
+    /**
+     * @// TODO: 4/7/2026  make this config the xml file
+     *
+     * @implNote  Hardware namespace Ports are 1 Higher than the coorsponding Ctrl or Exp Port number
+     */
+    void configurateHardware() throws FileNotFoundException {
+        // Your raw template text
+        /// TODO TOSTRING DOES NOT GET THE CONTENT !!!!!!!!!!!
+        String template = new FileReader("autoConfig.xml").toString();/// get the xml
+
+        String proccessedResult = template;
+
+
+        // 2. Loop through the template lines
+        for (String line : template.split("\\r?\\n")) {
+
+            String cleanLine = line.replace("%", "");
+
+            switch(line.split("_TYPE")[0].replace("%<", "")){
+                case "MOTOR":
+                    for (HardwareNamespaces motor : Motors) {
+                        //Extract Motor port number from motor name
+                        String port = "0";
+                        try{
+                            port = "" + (Integer.parseInt(motor.name().split("_")[1])-1);
+                        }catch(Exception e){ RobotTrace.trace(e.getMessage()); }
+                        String[] hardwareSpace = hardware.get(motor);
+
+                        // Get values from decrypted Hardware space
+                        String motorName = hardwareSpace[0];
+                        String motorType = hardwareSpace[1];
+                        boolean isExpDevice = hardwareSpace[0].contains("exp");
+
+
+                        // We should only add EXP Devices to the exp hub and CTRL devices to the ctrl hub so we filter
+                        if(cleanLine.contains("TYPE_EXP") && isExpDevice){
+                            proccessedResult = proccessedResult.replaceAll(line, cleanLine.replace("MOTOR_NAME", motorName)
+                                    .replace("MOTOR_PORT", port).replace("MOTOR_TYPE_EXP", motorType));
+                        }else if(cleanLine.contains("TYPE_CTRL") && !isExpDevice){
+                            proccessedResult = proccessedResult.replaceAll(line, cleanLine.replace("MOTOR_NAME",  motorName )
+                                    .replace("MOTOR_PORT", port ).replace("MOTOR_TYPE_CTRL", motorType));
+                        }
+                    }
+                    break;
+                case "SERVO":
+
+                    for (HardwareNamespaces servo : Servos) {
+                        //Extract Servo port number from servo name
+                        String port = "0";
+                        try{
+                            port = "" + (Integer.parseInt(servo.name().split("_")[1])-1);
+                        }catch(Exception e){ RobotTrace.trace(e.getMessage()); }
+                        String[] hardwareSpace = hardware.get(servo);
+
+                        // Get values from decrypted Hardware space
+                        String servoName = hardwareSpace[0];
+                        String servoType = hardwareSpace[1];
+                        boolean isExpDevice = hardwareSpace[0].contains("exp");
+
+
+                        // We should only add EXP Devices to the exp hub and CTRL devices to the ctrl hub so we filter
+                        if(cleanLine.contains("TYPE_EXP") && isExpDevice){
+                            proccessedResult = proccessedResult.replaceAll(line, cleanLine.replace("SERVO_NAME", servoName)
+                                    .replace("SERVO_PORT", port).replace("SERVO_TYPE_EXP", servoType));
+                        }else if(cleanLine.contains("TYPE_CTRL") && !isExpDevice){
+                            proccessedResult = proccessedResult.replaceAll(line, cleanLine.replace("SERVO_NAME",  servoName )
+                                    .replace("SERVO_PORT", port ).replace("SERVO_TYPE_CTRL", servoType));
+                        }
+                    }
+                    break;
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + line.split("_TYPE")[0].replace("%<", ""));
+            }
+
+        }
+        /// todo make this set active config etc yk
+        /// Check with storage device if theres a external drive with a config file
+        if(StorageDevice.checkForExternalDrive()) {
+            StorageDevice.findExternalDrives()[0].checkForConfigurationFile().priorityMergeConfigurationContent(proccessedResult)
+                    .vaildateConfigurationFileContent().pushConfigurationFileToInternal();
+        }else{
+
+        }
+    }
 
 
 }

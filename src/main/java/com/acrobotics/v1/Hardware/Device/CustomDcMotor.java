@@ -1,246 +1,188 @@
 package com.acrobotics.v1.Hardware.Device;
 
 import com.acrobotics.v1.RobotTrace;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
-import com.qualcomm.robotcore.hardware.Servo;
-
 import java.util.ArrayList;
 
 /**
- * Dc Motor extentions of extensitons
- * Now this needs more work
- * @// TODO: 3/30/2026 We need to work on this implementing alot of different control types like the flywheel mode etc
- * @// TODO: 3/30/2026  Additionally we need to implement drive motor command etc
+ * CustomDcMotor: A lightweight, daisy-chainable motor wrapper.
+ * Features: Absolute rotation tracking, easy toggles, and dynamic power mapping.
  */
-public class CustomDcMotor extends  CustomDevice{
+public class CustomDcMotor extends CustomDevice {
 
-    /**
-     * The Servo Instance
-     * and Details for the for it
-     */
-    private final DcMotorEx dcMotor;
-    private final int portNum;
+    private final DcMotorEx motor;
+    private final double ticksPerRev;
 
-
-
-    /**
-     * Static stuff
-     */
-    private static ArrayList<CustomDcMotor> allMotors = new ArrayList<CustomDcMotor>();
+    // State tracking
+    private static ArrayList<CustomDcMotor> allMotors = new ArrayList<>();
     private static boolean motorsEnabled = true;
 
+    private boolean isToggled = false;
+    private boolean lastToggleInput = false;
+    private boolean isFlipped = false;
 
-
-
-    private boolean toggled = true;
-
-    private boolean flipped = false;
-    private float power = 0;
-
-    /**
-     * This tracks rotations
-     * Element 0 is the forward rotations
-     * Element 1 is the backwards rotations
-     */
-    private double[] rotations = {0,0};
+    // Rotation tracking variables
+    private int lastEncoderPosition = 0;
+    private double totalAbsoluteTicks = 0;
 
     /**
-     * Makes this a object
-     * @param motor the motor Hardware device object
-     * @param portNumber the port 0-15
+     * make a motor here!
+     * @param device The hardware device from the hardwareMap
+     * @param ticksPerRev Ticks per revolution (e.g., 537.7 for goBILDA 312)
      */
-    public CustomDcMotor(HardwareDevice motor, int portNumber){
-        this.dcMotor = (DcMotorEx) motor;
-        this.portNum = portNumber;
+    public CustomDcMotor(HardwareDevice device, double ticksPerRev) {
+        this.motor = (DcMotorEx) device;
+        this.ticksPerRev = ticksPerRev;
+
+        // Default behavior: reset and run
+        this.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         allMotors.add(this);
     }
 
-
-
-
     /**
-     * Sets the power of the motor
-     * @param power the power
-     * @return A instance of this class (For Daisy Chaining)
+     * Package privated update for the loop,
+     * Called within device handler when all hardware is constructed
      */
-    public CustomDcMotor setPower(float power){
-        if(motorsEnabled) {
-            this.power = power;
-            dcMotor.setPower(power);
-        }else{
-            RobotTrace.notify("WARNING MOTORS are currently not operating according to requirements");
-        }
-        return this;
+     void update() {
+        int currentPos = motor.getCurrentPosition();
+        // Track absolute distance moved regardless of direction
+        totalAbsoluteTicks += Math.abs(currentPos - lastEncoderPosition);
+        lastEncoderPosition = currentPos;
+
     }
 
+    // --- BASIC CONTROLS ---
 
     /**
-     * Get the power currently set
-     * @return the power
+     * sets the power for the motor
+     * @implNote Power is affected by if the direction of the motor is fliped or not!
+     * @param power power for the motor
+     * @return self
      */
-    public double getPower(){
-        return dcMotor.getPower();
-    }
-
-    /**
-     * Gets the total rotations of the motor
-     * @// TODO: 3/31/2026 We need to make this work aswell
-     * @return the rotations
-     */
-    public double getTotalRotations(){
-        return rotations[0] + rotations[1];
-    }
-
-    /**
-     * Returns the rotations forwards from the starting position
-     * @return the rotations fowards
-     * @implNote For example if you rotate 5 forward and  3 back then this would return 2
-     */
-    public double getRotations(){
-        return rotations[0] - rotations[1];
-    }
-    /**
-     * Powers a motor when the theWhen Variable is true at power
-     * @param theWhen control variable
-     * @param power the power set to
-     * @return A instance of this class (For Daisy Chaining)
-     */
-    public CustomDcMotor powerWhen(boolean theWhen, double power){
-        if(theWhen){
-            setPower((float)power);
-        }else{
-            setPower(0);
-        }
-        return this;
-    }
-    //TODO
-    public CustomDcMotor setPowerDynamically(){
-        return this;
-    }
-
-
-    /**
-     * Powers a motor when the theWhen Variable is true at power
-     * @param theWhen control variable
-     * @param power the power set to
-     * @param defaultPower the power set when its not true
-     * @return A instance of this class (For Daisy Chaining)
-     */
-    public CustomDcMotor powerWhen(boolean theWhen, double power, double defaultPower){
-        if(theWhen){
-            setPower((float)power);
-        }else{
-            setPower((float) defaultPower);
+    public CustomDcMotor setPower(double power) {
+        if (motorsEnabled) {
+            motor.setPower(isFlipped ? -power : power);
+        } else {
+            RobotTrace.notify("WARNING: Motors disabled. Power ignored.");
         }
         return this;
     }
 
     /**
-     * Stops the motor temporarily
-     * @return A instance of this class (For Daisy Chaining)
+     * Stops the motor
+     * @return self
      */
-    public CustomDcMotor stop(){
-        dcMotor.setPower(0);
-        return this;
-    }
-
-    /**
-     * Toggles the motor on and off based off toggler variable
-     * @param toggler a boolean for when the motor should be toggled
-     * @return A instance of this class (For Daisy Chaining)
-     */
-    public CustomDcMotor toggle(boolean toggler){
-        if(toggled){
-            /// Normal
-            if(toggler){
-                /// When the btn pressed
-                setPower(power);
-            }else{
-                /// When its not pressed
-                setPower(0);
-            }
-        }else{
-            /// Reversed
-            if(toggler){
-                /// When the btn pressed
-                setPower(0);
-            }else{
-                /// When its not pressed
-                setPower(power);
-            }
+    public CustomDcMotor stop() {
+        if (motor.getMode() == DcMotor.RunMode.RUN_TO_POSITION) {
+            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
+        motor.setPower(0);
         return this;
     }
 
     /**
-     * Flips the on and off state of the toggle method
-     * @return A instance of this class (For Daisy Chaining)
+     * Flips the direction logic of the motor without changing hardware config
+     * @return self
      */
-    public CustomDcMotor flip(){
-        this.toggled = !toggled;
+    public CustomDcMotor flip() {
+        this.isFlipped = !this.isFlipped;
         return this;
     }
 
-
-
-    /**
-     * Rotates the motor
-     * @param rotations of times
-     * @// TODO: 3/31/2026 Make the rotation system work
-     * @return A instance of this class (For Daisy Chaining)
-     */
-    public CustomDcMotor rotate(double rotations){
-        return this;
-    }
-
+    // --- SMART LOGIC ---
 
     /**
-     * Completely Disables motors untill you call start()
-     *
-     * @return A instance of this class (For Daisy Chaining)
+     * Powers motor while condition is held, stops otherwise
+     * @param condition T/F
+     * @param powerPercentage the power set to while condit met
+     * @return self
      */
-    public CustomDcMotor forceStop(){
-        dcMotor.setMotorDisable();
+    public CustomDcMotor powerWhen(boolean condition, double powerPercentage) {
+        setPower(condition ? (powerPercentage / 100.0) : 0);
         return this;
     }
 
     /**
-     * After forcestop you must start the motor again
-     * @return A instance of this class (For Daisy Chaining)
+     * Toggles motor state on the "rising edge" of the boolean input
+     * @param  condition T/F that toggles
+     * @param powerPercentage  the power set when toggled
+     * @return self
      */
-    public CustomDcMotor start(){
-        dcMotor.setMotorEnable();
-        return this;
-    }
-
-
-
-    /**
-     * Stops all motors Temporally
-     */
-    public static void stopAllMotors() {
-        allMotors.forEach(CustomDcMotor::stop);
-    }
-
-    /**
-     * Toggles all motors disabled or enabled
-     * @return if they were disabled or enabled
-     */
-    public static boolean toggleMotorsEnabled(){
-        motorsEnabled = !motorsEnabled;
-        RobotTrace.notify("Motors are now: " + motorsEnabled);
-        if(motorsEnabled){
-            allMotors.forEach(CustomDcMotor::forceStop);
-        }else{
-            allMotors.forEach(CustomDcMotor::start);
+    public CustomDcMotor toggle(boolean condition, double powerPercentage) {
+        if (condition && !lastToggleInput) {
+            isToggled = !isToggled;
         }
-        return motorsEnabled;
+        lastToggleInput = condition;
+        setPower(isToggled ? (powerPercentage / 100.0) : 0);
+        return this;
     }
 
+    /**
+     * Maps a raw value (like sensor distance or trigger) directly to motor power
+     * this is just set power.... what was i thinking
+     */
+    public CustomDcMotor setPowerDynamically(double value) {
+        setPower(value);
+        return this;
+    }
 
+    /**
+     * rotates the motor a specific amount
+     * @param rotations the amount of rotations (-32 to 32);
+     * @return self
+     */
+    public CustomDcMotor rotate(double rotations) {
+        int target = motor.getCurrentPosition() + (int)(rotations * ticksPerRev);
+        motor.setTargetPosition(target);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        setPower( 100.0);
+        return this;
+    }
 
+    // --- TELEMETRY / DATA ---
 
+    /**
+     * Returns net rotations (Forward 5 + Back 3 = 2)
+     */
+    public double getRotations() {
+        return motor.getCurrentPosition() / ticksPerRev;
+    }
 
+    /**
+     * Returns absolute total work done (Forward 5 + Back 3 = 8)
+     */
+    public double getTotalRotations() {
+        return totalAbsoluteTicks / ticksPerRev;
+    }
 
+    /**
+     * gets motor power
+     */
+    public double getPower() {
+        return motor.getPower();
+    }
+
+    /**
+     * Stops all motors
+     */
+    public static void stopAll() {
+        for (CustomDcMotor m : allMotors) m.stop();
+    }
+
+    /**
+     * Disables all motors
+     */
+    public static void globalDisable() {
+        motorsEnabled = false;
+        for (CustomDcMotor m : allMotors) m.motor.setMotorDisable();
+    }
+
+    public static void globalEnable() {
+        motorsEnabled = true;
+        for (CustomDcMotor m : allMotors) m.motor.setMotorEnable();
+    }
 }
