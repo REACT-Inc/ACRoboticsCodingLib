@@ -1,7 +1,7 @@
 package com.acrobotics.v1.Hardware;
 
 import com.acrobotics.v1.RobotTrace;
-import com.acrobotics.v1.Storage.StorageDevice;
+//import com.acrobotics.v1.Storage.StorageDevice;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -255,12 +255,14 @@ public class HardwareConfigurator {
         }
         /// todo make this set active config etc yk
         /// Check with storage device if theres a external drive with a config file
-        if(StorageDevice.checkForExternalDrive()) {
-            StorageDevice.findExternalDrives()[0].checkForConfigurationFile().priorityMergeConfigurationContent(proccessedResult)
-                    .vaildateConfigurationFileContent().pushConfigurationFileToInternal();
-        }else{
+//        if(StorageDevice.checkForExternalDrive()) {
+//            StorageDevice.findExternalDrives()[0].checkForConfigurationFile().priorityMergeConfigurationContent(proccessedResult)
+//                    .vaildateConfigurationFileContent().pushConfigurationFileToInternal();
+//        }else{
+//
+//        }
 
-        }
+        /// TODO MAKE IT MAKE CONFIG
     }
 
 

@@ -4,6 +4,7 @@ import com.acrobotics.v1.Hardware.Device.CustomDcMotor;
 import com.acrobotics.v1.Hardware.Device.CustomServo;
 import com.acrobotics.v1.MathEx;
 import com.acrobotics.v1.Simplify.SimpleOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -105,6 +106,7 @@ public class Hardware {
      * @return the voltage
      */
     public static double getRobotVoltage(){
+
         return opmode.hardwareMap.get(VoltageSensor.class, "voltageSensor").getVoltage();
     }
 

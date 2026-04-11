@@ -59,7 +59,10 @@ public abstract class SimpleOpMode extends OpMode {
         // Hardware Scan begin
         HardwareScanner.beginScan(this);
         /// TODO make the instance variables for this opmode for the motors and servos be init here
-        this.motor0 = Hardware.getMotor("exp_dcMotor_0");
+        this.motor0 = Hardware.getMotor("motor0");
+        this.motor1 = Hardware.getMotor("motor1");
+        this.motor2 = Hardware.getMotor("motor2");
+        this.motor3 = Hardware.getMotor("motor3");
 //
 //        // 2. Access your motors easily
 //        DcMotor frontLeft = Hardware.getMotor("front_left");
