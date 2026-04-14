@@ -7,6 +7,7 @@ import com.acrobotics.v1.Simplify.SimpleOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
@@ -27,7 +28,12 @@ import java.util.HashMap;
  */
 public class Hardware {
 
+    private static HardwareMap hardwareMap;
+    public static  HardwareMap getHardwareMap(){
+        return hardwareMap;
+    }
 
+    public static float runTime = 0f;
     /**
      * All the devices in the current configuration
      */
@@ -45,6 +51,7 @@ public class Hardware {
      */
     public Hardware(SimpleOpMode opModeObject){
         opmode = opModeObject;
+        hardwareMap = opmode.hardwareMap;
         //Scans
         HardwareScanner.beginScan(opModeObject);
 

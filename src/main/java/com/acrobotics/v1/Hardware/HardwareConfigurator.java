@@ -1,7 +1,13 @@
 package com.acrobotics.v1.Hardware;
 
 import com.acrobotics.v1.RobotTrace;
+import com.qualcomm.hardware.rev.RevColorSensorV3;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 //import com.acrobotics.v1.Storage.StorageDevice;
+
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorGoBildaPinpoint;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -70,9 +76,15 @@ public class HardwareConfigurator {
         SERVO_7, SERVO_8, SERVO_9, SERVO_10, SERVO_11, SERVO_12
     };
 
-    HardwareNamespaces[] Motors = {HardwareNamespaces.MOTOR_1, HardwareNamespaces.MOTOR_2, HardwareNamespaces.MOTOR_3, HardwareNamespaces.MOTOR_4, HardwareNamespaces.MOTOR_5, HardwareNamespaces.MOTOR_6, HardwareNamespaces.MOTOR_7, HardwareNamespaces.MOTOR_8};
+    static HardwareNamespaces[] Motors = {HardwareNamespaces.MOTOR_1, HardwareNamespaces.MOTOR_2, HardwareNamespaces.MOTOR_3, HardwareNamespaces.MOTOR_4, HardwareNamespaces.MOTOR_5, HardwareNamespaces.MOTOR_6, HardwareNamespaces.MOTOR_7, HardwareNamespaces.MOTOR_8};
 
-    HardwareNamespaces[] Servos = {HardwareNamespaces.SERVO_1, HardwareNamespaces.SERVO_2, HardwareNamespaces.SERVO_3, HardwareNamespaces.SERVO_4, HardwareNamespaces.SERVO_5, HardwareNamespaces.SERVO_6, HardwareNamespaces.SERVO_7, HardwareNamespaces.SERVO_8, HardwareNamespaces.SERVO_9, HardwareNamespaces.SERVO_10, HardwareNamespaces.SERVO_11, HardwareNamespaces.SERVO_12};
+    static HardwareNamespaces[] Servos = {HardwareNamespaces.SERVO_1, HardwareNamespaces.SERVO_2, HardwareNamespaces.SERVO_3, HardwareNamespaces.SERVO_4, HardwareNamespaces.SERVO_5, HardwareNamespaces.SERVO_6, HardwareNamespaces.SERVO_7, HardwareNamespaces.SERVO_8, HardwareNamespaces.SERVO_9, HardwareNamespaces.SERVO_10, HardwareNamespaces.SERVO_11, HardwareNamespaces.SERVO_12};
+
+
+
+
+
+
     /**
      * THis is the map for the hardware devices we want in the config
      * @// TODO: 3/24/2026  These need to bew used below this  and auto added to one string soit is vaild xml
@@ -175,6 +187,18 @@ public class HardwareConfigurator {
 
         }
     };
+    /**
+     * A mapping from The string Namespaces to the class map def
+     */
+    static HashMap<String, Class> stringToClassMap = new HashMap<String, Class>() {
+        {
+            put("Servo", Servo.class);
+            put("ColorSensorV3", RevColorSensorV3.class);
+            put("PinPoint", SensorGoBildaPinpoint.class);
+            put("TouchSensor", TouchSensor.class);
+            put("goBILDA5203SeriesMotor", DcMotorEx.class);
+        }
+    };
 
 
     /**
@@ -263,6 +287,10 @@ public class HardwareConfigurator {
 //        }
 
         /// TODO MAKE IT MAKE CONFIG
+
+
+        //NOW we will start finding the motors etc
+        HardwareScanner.findRealDevices(hardware);
     }
 
 

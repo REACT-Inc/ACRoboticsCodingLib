@@ -1,16 +1,27 @@
 package com.acrobotics.v1.Hardware;
 
+import com.acrobotics.v1.Hardcoded;
+import com.acrobotics.v1.Hardware.Device.CustomDcMotor;
+import com.acrobotics.v1.Hardware.Device.CustomDevice;
+import com.acrobotics.v1.Hardware.Device.CustomServo;
 import com.acrobotics.v1.Simplify.SimpleOpMode;
 
 import android.util.Xml;
+
+import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.xmlpull.v1.XmlPullParser;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.CompletableFuture;
+
 /**
  * handles scanning the hardware for devices and relaying they exist
  *
@@ -47,6 +58,89 @@ import java.util.HashMap;
  
  */
 public class HardwareScanner {
+
+
+    private ArrayList<CustomDcMotor> foundMotors = new ArrayList<>();
+    private ArrayList<CustomServo> foundServos = new ArrayList<>();
+
+
+
+
+
+
+
+
+
+    public void findRealDevices(HashMap<HardwareConfigurator.HardwareNamespaces, String[]> hardware){
+
+        /// Now we must iterate thru and test everything
+
+
+        for(HardwareConfigurator.HardwareNamespaces motor : HardwareConfigurator.Motors){
+            String configName = hardware.get(motor)[0];
+            Class classDef = HardwareConfigurator.stringToClassMap.get(hardware.get(motor)[1]);
+            DcMotorEx m = (DcMotorEx)Hardware.getHardwareMap().get(classDef, configName);
+            /// TEST MOTOR OUT
+            // Run lift and drive simultaneously
+            CompletableFuture<Void> testResults = CompletableFuture.runAsync(() -> {
+                testDeviceForLife(m);
+                // Code to raise lift
+            });
+
+
+
+            CompletableFuture<Void> driveTask = CompletableFuture.runAsync(() -> {
+                // Code to drive robot
+            });
+
+// Wait for both to finish
+            CompletableFuture.allOf(testResults, driveTask).join();
+// Proceed to next step
+
+            /// Now make the dcmotorcustom sutff
+            CustomDcMotor customMotor = (CustomDcMotor) createCustomHardwareDevice(m);
+            customMotor.addVerificationForLifeResults(testResults);
+        }
+
+    }
+
+    private boolean testDeviceForLife(HardwareDevice device){
+        Timer elapsed = new Timer();
+        if(device instanceof DcMotorEx){
+            DcMotorEx m = (DcMotorEx) device;
+            float startPosition = m.getCurrentPosition();
+            m.setPower(Hardcoded.PowerToReadMovement);
+            while(elapsed.getElapsedTimeSeconds() < 5){
+                /// Waiting till 5 seconds passed to verify we tested mtoor fully
+
+            }
+
+            /// Now we can check if motor pos moved
+
+            if(startPosition+5 > m.getCurrentPosition() && startPosition-5 < m.getCurrentPosition()){
+                /// Means it really didnt move the +- 5 is because static etc can change the values so
+                return false;
+            }else{
+                /// MOTOR EXISTS!
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Creats a custom hardware device
+     * @param device the hardware device
+     * @return the new device
+     */
+    static CustomDevice createCustomHardwareDevice(HardwareDevice device){
+        CustomDevice newDevice = new CustomDevice();
+        if(device instanceof DcMotorEx){
+            newDevice = new CustomDcMotor(device, 1000);
+        }
+
+        return newDevice;
+    }
 
 
 

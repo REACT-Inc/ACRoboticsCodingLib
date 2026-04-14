@@ -16,6 +16,7 @@ public class Hardcoded {
 
 
     public static String configurationName = "robotConfiguration.xml";
+    public static double PowerToReadMovement = 0.01;
 
 
     public class BeltDrive{

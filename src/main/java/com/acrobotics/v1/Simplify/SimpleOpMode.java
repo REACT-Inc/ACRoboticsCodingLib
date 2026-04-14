@@ -20,6 +20,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
  */
 public abstract class SimpleOpMode extends OpMode {
 
+
     public CustomDcMotor motor0, motor1, motor2, motor3, motor4, motor5, motor6, motor7;
     public boolean squarePressed;
     public boolean squarePressed(CustomDevice device, double power){
@@ -56,6 +57,8 @@ public abstract class SimpleOpMode extends OpMode {
      */
     @Override
     public final void init() {
+        Hardware.runTime = (float)super.getRuntime();
+
         // Hardware Scan begin
         HardwareScanner.beginScan(this);
         /// TODO make the instance variables for this opmode for the motors and servos be init here
@@ -88,6 +91,8 @@ public abstract class SimpleOpMode extends OpMode {
      */
     @Override
     public final void init_loop() {
+        Hardware.runTime = (float)super.getRuntime();
+
         //This calls onInitLoop in the subclass
         onInit_loop();
     }
@@ -105,6 +110,8 @@ public abstract class SimpleOpMode extends OpMode {
      */
     @Override
     public final void start() {
+        Hardware.runTime = (float)super.getRuntime();
+
         //This calls Onstart in the subclass
         onStart();
     }
@@ -121,6 +128,8 @@ public abstract class SimpleOpMode extends OpMode {
      */
     @Override
     public final void loop() {
+        Hardware.runTime = (float)super.getRuntime();
+
         //This calls theloop in the subclass
         onStart_loop();
     }
@@ -136,6 +145,7 @@ public abstract class SimpleOpMode extends OpMode {
      */
     @Override
     public final void stop() {
+
         /// TODO stop stuff
 
     }
