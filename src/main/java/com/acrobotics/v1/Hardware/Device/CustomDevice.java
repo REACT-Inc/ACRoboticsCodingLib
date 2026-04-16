@@ -21,7 +21,13 @@ public class CustomDevice  {
      * @param testResults completeable voids
      */
     public void addVerificationForLifeResults(CompletableFuture<Boolean> testResults) {
-        testResults.whenCompleteAsync();
+        testResults.whenCompleteAsync((result, exception) -> {
+            if (exception != null) {
+                //NOT GOOD
+            } else {
+                deviceIsReal = result;
+            }
+        });;
 
 
     }

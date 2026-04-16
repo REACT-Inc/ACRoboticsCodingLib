@@ -82,19 +82,14 @@ public class HardwareScanner {
             DcMotorEx m = (DcMotorEx)Hardware.getHardwareMap().get(classDef, configName);
             /// TEST MOTOR OUT
             // Run lift and drive simultaneously
-            CompletableFuture<Void> testResults = CompletableFuture.runAsync(() -> {
-                testDeviceForLife(m);
-                // Code to raise lift
+            CompletableFuture<Boolean> testResults = CompletableFuture.supplyAsync(() -> {
+                // This runs in the background
+                return testDeviceForLife(m);
             });
 
 
-
-            CompletableFuture<Void> driveTask = CompletableFuture.runAsync(() -> {
-                // Code to drive robot
-            });
 
 // Wait for both to finish
-            CompletableFuture.allOf(testResults, driveTask).join();
 // Proceed to next step
 
             /// Now make the dcmotorcustom sutff
