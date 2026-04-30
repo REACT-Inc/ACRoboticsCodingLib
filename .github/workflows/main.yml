@@ -1,0 +1,16 @@
+            - name: prettier-java-format-action
+  # You may pin to the exact commit or the version.
+  # uses: tsar-boomba/prettier-java-action@0b6f73e327951a4ba1da05f5dbb3e227201af0a4
+  uses: tsar-boomba/prettier-java-action@v1.1.0
+  with:
+    # Arguments for Prettier cli.
+    prettier-args: # optional, default is -w
+    # Pattern to match the files to be formatted.
+    files: # optional, default is **/*.java
+    # Whether or not you want the action to push to your repo with the formatting.
+    commit: # optional, default is true
+    # Username for the github action to commit with.
+    github-username: # optional, default is github-actions
+    # Message for formatter commit.
+    commit-message: # optional, default is Format Java
+          
